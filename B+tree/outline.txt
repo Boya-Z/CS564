@@ -1,0 +1,7 @@
+Tests:
+
+All the extra tests are added after the original tests in main.cpp; (from test 4 to 11)
+
+Design Report:
+
+Design report is written in word format and transformed to pdf format, named design_report.pdf; Included in the folder
