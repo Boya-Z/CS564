@@ -47,14 +47,14 @@ enum Operator
  */
 //                                                  sibling ptr     numValidKeys           key               rid
 const  int INTARRAYLEAFSIZE = ( Page::SIZE - 2 * sizeof( PageId ) - sizeof( int )) / ( sizeof( int ) + sizeof( RecordId ) );
-// const  int INTARRAYLEAFSIZE = 2; // For testing purposes
+// const  int INTARRAYLEAFSIZE = 4; // For testing purposes
 
 /**
  * @brief Number of key slots in B+Tree non-leaf for INTEGER key.
  */
 //                                                     level     extra pageNo          numValidKeys           key             pageNo
 const  int INTARRAYNONLEAFSIZE = ( Page::SIZE - sizeof( int ) - 2 * sizeof( PageId ) - sizeof( int )) / ( sizeof( int ) + sizeof( PageId ) );
-// const  int INTARRAYNONLEAFSIZE = 2; // For testing purposes
+// const  int INTARRAYNONLEAFSIZE = 4; // For testing purposes
 /**
  * @brief Structure to store a key-rid pair. It is used to pass the pair to functions that 
  * add to or make changes to the leaf node pages of the tree. Is templated for the key member.

@@ -160,15 +160,15 @@ int main(int argc, char **argv)
 	test1();
 	test2();
 	test3();
-    test4();
-    test5();
-    test6();
-	//test7();
-	//test8();
-	//test9();
-	//test10();
-	//test11();
-	//errorTests();
+    // test4();
+    // test5();
+    // test6();
+	// test7();
+	// test8();
+	// test9();
+	// test10();
+	// test11();
+	errorTests();
 
 	delete bufMgr;
     std::cout<<"all test passed"<<std::endl;
@@ -221,7 +221,7 @@ void test4()
 }
 
 
-void test5()//
+void test5()
 {
 	std::cout << "--------------------" << std::endl;
 	std::cout << "createRelationRandom，test out_of_bound" << std::endl;
@@ -231,7 +231,7 @@ void test5()//
 	std::cout << "test5 passed" << std::endl;
 }
 
-void test6()//
+void test6()
 {
 	std::cout << "--------------------" << std::endl;
 	std::cout << "createRelationRandom，test empty tree" << std::endl;
@@ -565,7 +565,7 @@ void createRelationRandomSize(int relationSize) {
   // destroy any old copies of relation file
   try {
     File::remove(relationName);
-  } catch (FileNotFoundException &e) {
+  } catch (const FileNotFoundException &e) {
   }
   file1 = new PageFile(relationName, true);
 
@@ -597,7 +597,7 @@ void createRelationRandomSize(int relationSize) {
       try {
         new_page.insertRecord(new_data);
         break;
-      } catch (InsufficientSpaceException &e) {
+      } catch (const InsufficientSpaceException &e) {
         file1->writePage(new_page_number, new_page);
         new_page = file1->allocatePage(new_page_number);
       }
@@ -634,13 +634,6 @@ void indexTests()
 void largeIndexTests()
 {
 	largeInt();
-	try
-	{
-		File::remove(intIndexName);
-	}
-    catch(const FileNotFoundException &e)
-    {
-    }
 }
 
 // -----------------------------------------------------------------------------
@@ -650,13 +643,6 @@ void largeIndexTests()
 void boundTests()
 {
     int_out_of_bound();
-	try
-	{
-		File::remove(intIndexName);
-	}
-    catch(const FileNotFoundException &e)
-    {
-    }
 }
 
 
@@ -667,13 +653,6 @@ void boundTests()
 void testEmpty()
 {
     emptyTree();
-	try
-	{
-		File::remove(intIndexName);
-	}
-    catch(const FileNotFoundException &e)
-    {
-    }
 }
 
 // -----------------------------------------------------------------------------
@@ -830,7 +809,7 @@ void int_out_of_bound()
 
 void emptyTree()
 {
-  std::cout << "Create a B+ Tree index on the integer field" << std::endl;
+   std::cout << "Create a B+ Tree index on the integer field" << std::endl;
   BTreeIndex index(relationName, intIndexName, bufMgr, offsetof(tuple,i), INTEGER);
 
 	// run some tests
@@ -841,8 +820,6 @@ void emptyTree()
 	checkPassFail(intScan(&index,0,GT,1,LT), 0)
 	checkPassFail(intScan(&index,500,GT,600,LT), 0)
 	checkPassFail(intScan(&index,2000,GTE,3000,LT), 0)
-
-  std::cout << "Exited emptyTree" << std::endl;
   
 }
 int intScan(BTreeIndex * index, int lowVal, Operator lowOp, int highVal, Operator highOp)
@@ -1036,7 +1013,7 @@ void errorTests()
 
 void deleteRelation()
 {
-	 std::cout << "Entered delete relation" << std::endl;
+	// std::cout << "Entered delete relation" << std::endl;
 	if(file1)
 	{
 		bufMgr->flushFile(file1);
@@ -1050,5 +1027,5 @@ void deleteRelation()
 	catch(const FileNotFoundException &e)
 	{
 	}
-	 std::cout << "Exited delete relation" << std::endl;
+	// std::cout << "Exited delete relation" << std::endl;
 }

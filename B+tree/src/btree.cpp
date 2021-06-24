@@ -121,7 +121,7 @@ BTreeIndex::~BTreeIndex()
 
 	// }
 	// try {
-	// 	bufMgr->unPinPage(file, 2, false);
+	// 	bufMgr->unPinPage(file, 8, false);
 	// } catch (const PageNotPinnedException &e){
 
 	// }
@@ -579,7 +579,6 @@ void BTreeIndex::startScan(const void* lowValParm,
 	while(cur->keyArray[nextEntry] < lowValInt){
 		if(nextEntry == cur->numValidKeys){
 			if(cur->rightSibPageNo == std::uint32_t(-1)) { // Reached beyond the rightest node
-				bufMgr->unPinPage(file, currentPageNum, false);
 				throw NoSuchKeyFoundException();
 			}
 			PageId lastPageNum = currentPageNum;
@@ -598,7 +597,6 @@ void BTreeIndex::startScan(const void* lowValParm,
 		} else { // Reached the rightest valid node of curNode
 			// Go to the right sibling if there's one
 			if(cur->rightSibPageNo == std::uint32_t(-1)) { // Reached beyond the rightest node
-				bufMgr->unPinPage(file, currentPageNum, false);
 				throw NoSuchKeyFoundException();
 			} else {
 				nextEntry = 0;
@@ -610,7 +608,6 @@ void BTreeIndex::startScan(const void* lowValParm,
 		}
 	}
 	if (cur->keyArray[nextEntry] > highValInt) {
-		bufMgr->unPinPage(file, currentPageNum, false);
     	throw NoSuchKeyFoundException();
   	}
 	bufMgr->unPinPage(file, currentPageNum, false);
