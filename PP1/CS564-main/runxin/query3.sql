@@ -1,0 +1,1 @@
+SELECT COUNT(num) FROM (SELECT COUNT(*) as num FROM Category GROUP BY item_id) WHERE num=4;
