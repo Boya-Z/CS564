@@ -8,3 +8,5 @@ We provide you with a fairly large volume of data downloaded from the eBay web s
 in JSON files. JSON is a model primarily used to store semi-structured data. It has become increasingly
 popular in recent years, and, for now, you can treat it as just another type of data that is straightforward to
 read. 
+
+Details of designed is in CS564/PP1/CS564-main/runxin/Design.pdf
